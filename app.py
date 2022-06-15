@@ -21,7 +21,7 @@ from pfrl.replay_buffers import ReplayBuffer
 
 def instantiate_environmnent():
     env = gym.make("SpaceInvadersNoFrameskip-v4")
-    env = AtariPreprocessing(env, grayscale_newaxis=False, frame_skip=4)
+    env = AtariPreprocessing(env, grayscale_newaxis=False, frame_skip=5)
     env = FrameStack(env, 4)
 
     return env
