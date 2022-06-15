@@ -1,5 +1,7 @@
 streamlit
 numpy
 gym
+gym[atari]
+gym[accept-rom-license]
 torch
 pfrl
