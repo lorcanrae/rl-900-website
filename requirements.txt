@@ -1,7 +1,5 @@
 streamlit
-tensorflow
 numpy
-
 gym
-
 torch
+pfrl
