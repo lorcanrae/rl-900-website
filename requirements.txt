@@ -1,8 +1,8 @@
 streamlit
 numpy
+opencv-python
 gym
 gym[atari]
 gym[accept-rom-license]
 torch
 pfrl
-opencv-python
