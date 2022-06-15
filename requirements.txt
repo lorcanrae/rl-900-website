@@ -4,6 +4,8 @@ numpy
 torch
 pfrl
 
+box2d-py
+
 opencv-python
 gym
 gym[atari]
