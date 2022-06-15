@@ -1,4 +1,4 @@
-streamlit==1.10.0
+streamlit
 
 numpy==1.18.5
 torch==1.11.0
