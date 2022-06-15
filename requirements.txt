@@ -9,6 +9,7 @@ box2d-py
 opencv-python
 gym
 gym[atari]
+gym[box2d]
 gym[all]
 gym[accept-rom-license]
 gym[other]
