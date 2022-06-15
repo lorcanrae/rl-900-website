@@ -7,6 +7,6 @@ pfrl==0.3.0
 opencv-python==4.6.0.66
 gym==0.24.1
 gym[atari]
-gym[box2d]
 gym[all]
 gym[accept-rom-license]
+gym[other]
