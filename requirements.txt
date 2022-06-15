@@ -1,9 +1,12 @@
 streamlit
+
 numpy
+torch
+pfrl
+
 opencv-python
 gym
 gym[atari]
+gym[all]
 gym[accept-rom-license]
 gym[other]
-torch
-pfrl
