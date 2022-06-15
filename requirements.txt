@@ -1,11 +1,11 @@
-streamlit
+streamlit==1.10.0
 
-numpy
-torch
-pfrl
+numpy==1.18.5
+torch==1.11.0
+pfrl==0.3.0
 
-opencv-python
-gym
+opencv-python==4.6.0.66
+gym==0.24.1
 gym[atari]
 gym[all]
 gym[accept-rom-license]
