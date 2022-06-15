@@ -4,5 +4,6 @@ opencv-python
 gym
 gym[atari]
 gym[accept-rom-license]
+gym[other]
 torch
 pfrl
