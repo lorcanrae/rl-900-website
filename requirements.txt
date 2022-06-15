@@ -1,13 +1,13 @@
 streamlit
 
-numpy
-torch
-pfrl
+numpy==1.18.5
+torch==1.11.0
+pfrl==0.3.0
 
 box2d-py
 
-opencv-python
-gym
+opencv-python==4.6.0.66
+gym==0.24.1
 gym[other]
 gym[atari]
 gym[box2d]
