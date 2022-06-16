@@ -4,7 +4,10 @@ from tensorflow import keras
 import numpy as np
 
 import gym
-from gym.wrappers.atari_preprocessing import AtariPreprocessing
+try:
+    from gym.wrappers.atari_preprocessing import AtariPreprocessing
+except:
+    from gym.wrappers.atari_preprocessing import AtariPreprocessing
 from gym.wrappers.frame_stack import FrameStack
 
 
