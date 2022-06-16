@@ -6,7 +6,6 @@ pfrl==0.3.0
 
 box2d-py
 
-opencv
 opencv-python
 
 gym==0.24.1
