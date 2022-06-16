@@ -52,6 +52,7 @@ col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
     st.title('BIGCHAMP-900')
+    st.markdown('''## Watch Bigchamp play in real-time!''')
     st.markdown("""## Time to save the world!""")
     episodes = st.slider('N Games', 1, 10, 5)
     start_model = st.button("BLAST OFF!")

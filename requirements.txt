@@ -1,8 +1,7 @@
 streamlit
 
 numpy==1.18.5
-torch==1.11.0
-pfrl==0.3.0
+tensorflow
 
 box2d-py
 
