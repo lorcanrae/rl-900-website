@@ -1,3 +1,5 @@
+--upgrade pip setuptools wheel
+
 streamlit
 
 numpy==1.18.5
