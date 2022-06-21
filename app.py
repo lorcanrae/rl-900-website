@@ -4,12 +4,9 @@ from tensorflow import keras
 import numpy as np
 
 import gym
-try:
-    from gym.wrappers.atari_preprocessing import AtariPreprocessing
-except:
-    from gym.wrappers.atari_preprocessing import AtariPreprocessing
+from gym.wrappers.atari_preprocessing import AtariPreprocessing
+from gym.wrappers.atari_preprocessing import AtariPreprocessing
 from gym.wrappers.frame_stack import FrameStack
-
 
 LOCAL_MODEL = r'models_h5/Student_Teacher_BestModel-ep3250.h5'
 
@@ -19,55 +16,42 @@ def instantiate_environmnent():
     env = gym.make("SpaceInvadersNoFrameskip-v4")
     env = AtariPreprocessing(env, grayscale_newaxis=True, frame_skip=5)
     env = FrameStack(env, 4)
-
     return env
 
 def load_model(model_h5=LOCAL_MODEL):
     model = keras.models.load_model(model_h5)
     return model
 
-### End Helper Funtions
-
-# Instantiate
+# Instantiate environment and model
 
 env = instantiate_environmnent()
 model = load_model()
+
+# Streamlit
 
 st.set_page_config(layout='wide')
 
 ### Sidebar
 
-# st.sidebar.title('BIGCHAMP-900')
-
-# st.sidebar.markdown("""## Time to save the world!""")
-# episodes = st.sidebar.expander('N games').slider('', 1, 10, 5)
-# start_model = st.sidebar.button("BLAST OFF!")
-# stop_model = st.sidebar.button("Stand down Champ!")
-
-# st.sidebar.markdown('''info''')
+# TODO: add sidebar to have a separate page with more detailed about
 
 ### Main
 
 col1, col2, col3 = st.columns([1, 1, 1])
 
+DISPLAY_WIDTH = 420
+
 with col1:
     st.title('BIGCHAMP-900')
     st.markdown('''## Watch Bigchamp play in real-time!''')
-    st.markdown("""## Time to save the world!""")
-    episodes = st.slider('N Games', 1, 10, 5)
+    # st.markdown("""## Time to save the world!""")
+    episodes = st.slider('N Games', 1, 10, 10)
     start_model = st.button("BLAST OFF!")
     stop_model = st.button("Ease up Champ!")
 
-
-
-DISPLAY_WIDTH = 420
-
 with col2:
-
     if start_model:
-
         with st.empty():
-
             for episode in range(1, episodes+1):
                 state = np.asarray(env.reset()).reshape(84, 84, 4)
                 done = False
@@ -88,7 +72,6 @@ with col2:
         with st.empty():
             state = np.asarray(env.reset()).reshape(84, 84, 4)
             st.image(env.render(mode='rgb_array'), width=DISPLAY_WIDTH)
-
 
 with col3:
     st.markdown('''## About''')
