@@ -1,4 +1,4 @@
---upgrade pip setuptools wheel
+#--upgrade pip setuptools wheel
 
 streamlit
 
