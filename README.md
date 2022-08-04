@@ -11,6 +11,10 @@ A project by Lorcan Rae, Alexander Gribius, Daniel Hawkins, Alberto Lopez Rueda 
 
 ![Highest score our Agent achieved](https://github.com/lorcanrae/rl-900-website/blob/master/saved_videos/weekendmodel-model-e2-s665-30f.gif?raw=true)
 
+<p align="center">
+  <img width="200" height="300" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_videos/weekendmodel-model-e2-s665-30f.gif?raw=true">
+</p>
+
 ## Model
 
 TODO
