@@ -2,8 +2,8 @@
 
 Training an AI Agent to play Atari Space Invaders.
 
-An agent was trained using a Duelling Double DQN (Duelling DDQN) model, using an established
-model (IQN) as a Teacher during exploration. The agents where trained using Google Cloud Platforms (GCP)
+An agent was trained using a Duelling DQN model, using an established model (IQN) as
+a Teacher during exploration. The agents where trained using Google Cloud Platforms (GCP)
 VertexAI and the final model was embedded into a website to play in real time while I presented the
 project to my cohort.
 
@@ -21,13 +21,13 @@ TODO
 
 ### Local Minima
 
-All agents fell into local minima - resulting in performing continuous strategies. We believe this is primarily due to
-inadequate training.
+All agents fell into local minima - resulting in Agents performing the same strategies repeatedly.
+I believe this is primarily due to not training for long enough.
 
 ## Training
 
 Training was done on GCP VertexAI Virtual Machine in a Jupyter Notebook. I personally don't think this was great, but I
-can see why our Le Wagon teachers pushed us heavily in this direction, mainly to save time.
+can see why our Le Wagon teachers pushed us heavily in this direction to save time.
 
 ## Known Issues
 
@@ -46,19 +46,25 @@ a number of other packages. If any frame or video capture is required, Gym needs
 painful to do if using a WSL development environment.
 - TensorFlow and PyTorch - the Duelling DDQN models where written using TensorFlow, the IQN teacher model was written
 in PyTorch. Ideally they would have used the same package.
+- Incentive Structures - The only incentive structure agents where trained on was the default scoring system,
+i.e. 5 points for a first row alien, 10 points for a second row alien, up to 30 points for the sixth row aliens and 200
+points for killing the mother-ship. We noticed that there was a number of agents that tried to kill the mother-ship to
+their own detriment. Time permitting, it would have been interesting to experiment with custom incentive structures, for
+example, prioritizing killing lower level aliens to buy more time to clear the screen.
 
 ## Tools
 
-This project was written in Python using Numpy, TensorFlow, PyTorch. The models were trained
+This project was written in Python using Numpy, TensorFlow, PyTorch. Models were trained
 on GCP VertexAI inside jupyter notebooks and the front end was created and deployed with Streamlit.
 
 Python: Numpy, TensorFlow, PyTorch, Streamlit
 Google Cloud Platform: VertexAI
 
-<p align= 'center', float='left'>
+<p align='center', float='left'>
   <img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' width='50'>
   <img src='https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/numpy/numpy-original.svg' width='50'>
   <img src='https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg' width='50'>
   <img src='https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/pytorch/pytorch-original.svg' width='50'>
   <img src='https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg' width='50'>
   <img src='https://streamlit.io/images/brand/streamlit-mark-color.png' width='50'>
+</p>
