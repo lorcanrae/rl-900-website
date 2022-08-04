@@ -9,13 +9,15 @@ project to my cohort.
 
 A project by Lorcan Rae, Alexander Gribius, Daniel Hawkins, Alberto Lopez Rueda for Le Wagon Batch #900 in London.
 
+![](https://github.com/lorcanrae/rl-900-website/blob/master/saved_videos/weekendmodel-model-e2-s665-30f.gif?raw=true)
+
 <p float='left'>
-  <img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' width='60'>
-  <img src='https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/numpy/numpy-original.svg' width='60'>
-  <img src='https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg' width='60'>
-  <img src='https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/pytorch/pytorch-original.svg' width='60'>
-  <img src='https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg' width='60'>
-  <img src='https://streamlit.io/images/brand/streamlit-mark-color.png' width='60'>
+  <img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' width='50'>
+  <img src='https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/numpy/numpy-original.svg' width='50'>
+  <img src='https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg' width='50'>
+  <img src='https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/pytorch/pytorch-original.svg' width='50'>
+  <img src='https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg' width='50'>
+  <img src='https://streamlit.io/images/brand/streamlit-mark-color.png' width='50'>
 
 ## Model
 
