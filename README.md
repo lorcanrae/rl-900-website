@@ -9,7 +9,7 @@ project to my cohort.
 
 A project by Lorcan Rae, Alexander Gribius, Daniel Hawkins, Alberto Lopez Rueda for Le Wagon Batch #900 in London.
 
-![Highest score our Agent achieved](https://github.com/lorcanrae/rl-900-website/blob/master/saved_videos/weekendmodel-model-e2-s665-30f.gif?raw=true){width="600" height="400" style="display: block; margin: 0 auto" }
+![Highest score our Agent achieved](https://github.com/lorcanrae/rl-900-website/blob/master/saved_videos/weekendmodel-model-e2-s665-30f.gif?raw=true)
 
 ## Model
 
