@@ -9,8 +9,6 @@ project to my cohort.
 
 A project by Lorcan Rae, Alexander Gribius, Daniel Hawkins, Alberto Lopez Rueda for Le Wagon Batch #900 in London.
 
-![Highest score our Agent achieved](https://github.com/lorcanrae/rl-900-website/blob/master/saved_videos/weekendmodel-model-e2-s665-30f.gif?raw=true)
-
 <p align="center">
   <img width="200" height="300" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_videos/weekendmodel-model-e2-s665-30f.gif?raw=true">
 </p>
@@ -54,7 +52,7 @@ on GCP VertexAI inside jupyter notebooks and the front end was created and deplo
 Python: Numpy, TensorFlow, PyTorch, Streamlit
 Google Cloud Platform: VertexAI
 
-<p float='left'>
+<p align= 'center', float='left'>
   <img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' width='50'>
   <img src='https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/numpy/numpy-original.svg' width='50'>
   <img src='https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg' width='50'>
