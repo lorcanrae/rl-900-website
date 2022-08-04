@@ -8,7 +8,7 @@ from gym.wrappers.atari_preprocessing import AtariPreprocessing
 from gym.wrappers.atari_preprocessing import AtariPreprocessing
 from gym.wrappers.frame_stack import FrameStack
 
-LOCAL_MODEL = r'models_h5/Student_Teacher_BestModel-ep3250.h5'
+LOCAL_MODEL = r'saved_models/Student_Teacher_BestModel-ep3250.h5'
 
 ### Helper functions
 

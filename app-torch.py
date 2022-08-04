@@ -105,7 +105,6 @@ with col1:
                 With thanks to Oliver Giles
                 ''')
 
-
 DISPLAY_WIDTH = 420
 
 with col2:
