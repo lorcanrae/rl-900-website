@@ -1,18 +1,37 @@
 # Reinforcement Learning - BIGCHAMP900
 
-Training an AI Agent to play Atari Space Invaders
+Training an AI Agent to play Atari Space Invaders.
 
-# Model
+An agent was trained using a Duelling Double DQN (Duelling DDQN) model, using an established
+model (IQN) as a Teacher during exploration. The agents where trained using Google Cloud Platforms
+VertexAI and the final model was embedded into a website to play in real time while I presented the
+project to my cohort.
+
+A project by Lorcan Rae, Alexander Gribius, Daniel Hawkins, Alberto Lopez Rueda for Le Wagon Batch #900 in London.
+
+## Model
 
 TODO
 
-# Training
+## Training
 
 TODO
 
-# Known Issues
+## Known Issues
 
-TODO
+We had a few issues with this project:
+- Time - the project was done in 8 days, reinforcement models take a huge amount of time (and/or processing power)
+to train.
+- Content - Reinforcement Learning was outside of the scope of Le Wagon's teaching syllabus, we were required to
+learn the subject matter and apply it.
+- Frame Stacking - there was an error in frame shape and stacking as input into the model. As part of preprocessing
+frames are scaled and greyscaled to a single colour channel resulting in a frame shape of (84, 84, 1).
+To give the model a senses of temporality, four frames are stacked together, which should have resulted in an frame
+shape of (4, 84, 84, 1) then taking an element wise maximum of the four stacked frames as input to the model.
+We could not get this working with our existing framework and didn't have time to adequately diagnose and remedy.
+- Dependency conflicts - the package used to simulate Atari, [Gym](https://www.gymlibrary.ml/), has conflicts with
+a number of other packages. Additionally, if any capture is required, Gym needs to access a renderer or graphics card,
+painful to do if using a WSL environment.
 
 ## Tools
 
