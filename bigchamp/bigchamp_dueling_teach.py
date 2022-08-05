@@ -3,7 +3,7 @@
 import gym
 from gym.wrappers.atari_preprocessing import AtariPreprocessing
 from gym.wrappers.frame_stack import FrameStack
-from gym.wrappers.monitoring.video_recorder import VideoRecorder
+# from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 import numpy as np
 
@@ -245,6 +245,8 @@ if __name__ == '__main__':
             if frame_count < epsilon_random_frames or epsilon > np.random.rand(1)[0]:
                 # Take random action
                 # action = np.random.choice(num_actions)
+
+                # Take action from Teacher
                 action = agent.act(state.reshape(4, 84, 84))
                 # print(action)
                 # print(state.shape)
@@ -358,7 +360,7 @@ if __name__ == '__main__':
 
         episode_count += 1
 
-        # Condition to consider the task solved - beat the world record -_-
+        # Condition to consider the task solved - beat the world record
         if running_score > 220_000:
             print("xxxxxxxxxx")
             print("Solved at episode {}!".format(episode_count))

@@ -4,6 +4,7 @@ streamlit
 
 numpy==1.18.5
 tensorflow
+torch
 
 box2d-py
 
