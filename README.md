@@ -18,10 +18,21 @@ A project by Lorcan Rae, Alexander Gribius, Daniel Hawkins, Alberto Lopez Rueda 
 ## Models
 
 Two model architecture's are used to train agents, Deep Q Networks (DQN) and Dueling Deep Q Networks (Dueling DQN).
-Reinforcement is somewhat unique, in that it uses two models
+Q-Learning algoriths are based on state (**s**), action (**a**) and reward (**r**). With the goal to learn how much long term reward
+it will receive for each state (**s**), action (**a**) pair, and act to either maximise or minimise that reward.
 
-![DQN (top) and Dueling DQN (bottom architecture)]()
-'Image extract from Wang, Ziyu, et al. “Dueling network architectures for deep reinforcement learning.” arXiv preprint arXiv:1511.06581 (2015)'
+Two DQN and Dueling DQN models are leveraged to stabilise the learning process. The *main neural network* is used to estimate
+the Q-values for the current state **s** and action **a**. The *second neural network* has the exact same architecture as the
+main network, but it is used to estimate the Q-values of the next state and action, **s'** and **a'** respectively, based on the
+current state.
+All learning is done in the *main network*, the *target network* is frozen and the weights are transferred from *main* to *target*
+at fixed intervals, usually 10,000 frames. 
+
+<p align="center">
+  <img width="1000" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/dqn-dueldqn-model-arch.png?raw=true">
+</p>
+Top: DQN Model Architecture, Bottom: Dueling DQN Model Architecture
+Image extract from Wang, Ziyu, et al. “Dueling network architectures for deep reinforcement learning.” arXiv preprint arXiv:1511.06581 (2015)
 
 ### Local Minima
 
