@@ -13,7 +13,7 @@ The Agents highest score achieved was 665, see below for a video of our most suc
   <img width="300" height="450" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/weekendmodel-model-e2-s665-30f.gif?raw=true">
 </p>
 
-A project by Lorcan Rae, Alexander Gribius, Daniel Hawkins, Alberto Lopez Rueda for Le Wagon Batch #900 in London.
+A project by Lorcan Rae, Daniel Hawkins, Alberto Lopez Rueda and Alexander Gribius for Le Wagon Batch #900 in London.
 
 <p align='center', float='left'>
   <img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' width='50'>
