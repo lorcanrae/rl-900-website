@@ -8,6 +8,7 @@ from bigchamp.helper_functions import instantiate_environmnent
 
 
 def create_video(model_path, video_name, n_episodes=10):
+    '''Video capture for saved TensorFlow models'''
     env = instantiate_environmnent()
 
     model = keras.models.load_model(model_path)

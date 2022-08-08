@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
+import os
 
 from bigchamp.models import DQN, DuelingDQN, torch_iqn_teacher
 from bigchamp.helper_functions import instantiate_environmnent, reward_function
@@ -54,6 +55,7 @@ def train_bigchamp(n_actions=6,
     frame_count = 0
     explored = 0
     exploited = 0
+    lives = 3
 
     # Number of frames to take random action and observe output and greediness factor
     epsilon_random_frames = rand_frames # Should change depending on training time
@@ -112,7 +114,7 @@ def train_bigchamp(n_actions=6,
             score += reward
 
             # Reward modifier (This will also affect score)
-            reward = reward_function(reward)
+            reward, lives, rewards_history = reward_function(reward, info, lives, rewards_history)
 
             episode_reward += reward
 
@@ -167,8 +169,7 @@ def train_bigchamp(n_actions=6,
             if frame_count % update_target_network == 0:
                 model_target.set_weights(model.get_weights())
                 # Log details
-                print(f"Updating target network - running reward: {running_reward:.2f} \
-                    at episode {episode_count}, frame count {frame_count}")
+                print(f"Updating target network - running reward: {running_reward:.2f} at episode {episode_count}, frame count {frame_count}")
 
             # Limit the state and reward history
             if len(rewards_history) > max_memory_length:
@@ -180,7 +181,15 @@ def train_bigchamp(n_actions=6,
 
             # Increment timestep - not 100% sure why this is needed, but it is
             if done:
+                if frame_count < epsilon_random_frames:
+                    explored += 1
+                else:
+                    exploited += 1
                 break
+
+        # After episode processes
+
+        episode_count += 1
 
         # Update running reward to check condition for solving
         episode_reward_history.append(episode_reward)
@@ -190,9 +199,8 @@ def train_bigchamp(n_actions=6,
         running_reward = np.mean(episode_reward_history[-10:])
         running_score = np.mean(score_history[-10:])
 
-        if (episode_count + 1) % 10 == 0:
-            print(f'Episode {episode_count + 1} -- Reward Score: {episode_reward:.0f} -- \
-Frames Survived: {episode_frame_number} -- Epsilon: {epsilon:.3f}')
+        if (episode_count) % 10 == 0:
+            print(f'Episode {episode_count} -- Reward Score: {episode_reward:.0f} -- Frames Survived: {episode_frame_number} -- Epsilon: {epsilon:.3f}')
             print(f"10 Game Running Score: {running_score:.2f} -- 10 Game Running Reward: {running_reward:.2f}")
             print(f"Explored: {explored}, Exploited: {exploited}")
 
@@ -200,9 +208,9 @@ Frames Survived: {episode_frame_number} -- Epsilon: {epsilon:.3f}')
         if episode_count % 250 == 0:
             model_name = 'model-dqn' if model_type == 'DQN' else 'model-duelingdqn'
             model_name = model_name if teacher == False else f'{model_name}-teacher'
-            model.save(f"{model_name}-e{episode_count}")
-
-        episode_count += 1
+            rel_path = os.path.join('..', 'saved_models', f'{model_name}-e{episode_count}.h5')
+            dir_path = os.path.dirname(__file__)
+            model.save(f"{dir_path}/{rel_path}")
 
         # Condition to consider the task solved
         if running_score > 100_000:

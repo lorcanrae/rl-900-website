@@ -157,10 +157,12 @@ def torch_iqn_teacher(num_actions=6, rel_path_to_best='../teacher_model/best'):
     )
 
     abs_cwd_dir = os.path.dirname(os.path.abspath(__file__))
-    print(abs_cwd_dir)
+    # print(abs_cwd_dir)
     target_dir = os.path.join(abs_cwd_dir, rel_path_to_best)
-    print(target_dir)
+    # print(target_dir)
     agent.load(target_dir)
+    return agent
+
 
 if __name__ == '__main__':
     agent = torch_iqn_teacher()

@@ -7,3 +7,5 @@ raw_data/
 **/__pycache__/
 .env
 bigchamp/superseded
+*.mp4
+dqn-dueldqn-model-arch.png
