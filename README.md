@@ -7,13 +7,22 @@ a Teacher during exploration. The agents where trained using Google Cloud Platfo
 VertexAI and the final model was embedded into a website to play in real time while I presented the
 project to my cohort.
 
-The Agents highest score achieved was 665, see below for our agent playing Space Invaders.
+The Agents highest score achieved was 665, see below for a video of our most successful agent playing Space Invaders.
 
 <p align="center">
   <img width="300" height="450" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/weekendmodel-model-e2-s665-30f.gif?raw=true">
 </p>
 
 A project by Lorcan Rae, Alexander Gribius, Daniel Hawkins, Alberto Lopez Rueda for Le Wagon Batch #900 in London.
+
+<p align='center', float='left'>
+  <img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' width='50'>
+  <img src='https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/numpy/numpy-original.svg' width='50'>
+  <img src='https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg' width='50'>
+  <img src='https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/pytorch/pytorch-original.svg' width='50'>
+  <img src='https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg' width='50'>
+  <img src='https://streamlit.io/images/brand/streamlit-mark-color.png' width='50'>
+</p>
 
 ## Models
 
@@ -26,12 +35,13 @@ the Q-values for the current state **s** and action **a**. The *second neural ne
 main network, but it is used to estimate the Q-values of the next state and action, **s'** and **a'** respectively, based on the
 current state.
 All learning is done in the *main network*, the *target network* is frozen and the weights are transferred from *main* to *target*
-at fixed intervals, usually 10,000 frames. 
+at fixed intervals, usually 10,000 frames.
 
 <p align="center">
-  <img width="1000" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/dqn-dueldqn-model-arch.png?raw=true">
+  <img width="800" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/dqn-dueldqn-model-arch.png?raw=true">
 </p>
 Top: DQN Model Architecture, Bottom: Dueling DQN Model Architecture
+
 Image extract from Wang, Ziyu, et al. “Dueling network architectures for deep reinforcement learning.” arXiv preprint arXiv:1511.06581 (2015)
 
 ### Local Minima
