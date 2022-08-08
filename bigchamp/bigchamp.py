@@ -25,7 +25,7 @@ def train_bigchamp(n_actions=6,
         model_target = DuelingDQN(n_actions)
 
     if teacher:
-        teacher_model = torch_iqn_teacher()
+        teacher_model = torch_iqn_teacher(num_actions=n_actions)
 
     # Configuration paramaters for the whole setup
     gamma = 0.99 # Discount factor for past rewards
@@ -88,6 +88,7 @@ def train_bigchamp(n_actions=6,
             if frame_count < epsilon_random_frames or epsilon > np.random.rand(1)[0]:
                 # Take random action
                 action = np.random.choice(n_actions)
+
                 # Take teachers recommended action
                 if teacher:
                     action = teacher_model.act(state.reshape(4, 84, 84))
@@ -204,7 +205,7 @@ Frames Survived: {episode_frame_number} -- Epsilon: {epsilon:.3f}')
         episode_count += 1
 
         # Condition to consider the task solved
-        if running_score > 1000:
+        if running_score > 100_000:
             print("xxxxxxxxxx")
             print(f"Solved at episode {episode_count}!")
             model.save('model_solved')
@@ -216,4 +217,4 @@ if __name__ == '__main__':
                    rand_frames=10_000_000,
                    greedy_frames=50_000_000,
                    model_type=DuelingDQN,
-                   teacher=False)
+                   teacher=True)
