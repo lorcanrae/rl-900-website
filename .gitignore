@@ -1,6 +1,5 @@
 *.egg-info
 .coverage
-.ipynb_checkpoints
 .DS_Store
 raw_data/
 *.csv
@@ -8,4 +7,3 @@ raw_data/
 .env
 bigchamp/superseded
 *.mp4
-
