@@ -5,12 +5,13 @@ streamlit
 numpy==1.18.5
 tensorflow
 torch
+pfrl
 
 box2d-py
 
 opencv-python
 
-gym==0.24.1
+gym==0.21
 gym[other]
 gym[atari]
 gym[box2d]

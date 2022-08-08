@@ -1,6 +1,15 @@
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras import layers
+
+import os
+
+# IQN Teacher Model Imports
+import numpy as np
+import torch
+
+from pfrl.agents.iqn import IQN, ImplicitQuantileQFunction, CosineBasisLinear
+from pfrl.explorers import LinearDecayEpsilonGreedy
+from pfrl.replay_buffers import ReplayBuffer
 
 # DQN Model
 
@@ -95,3 +104,63 @@ class DuelingDQN(keras.Model):
         A = self.A(x)
         Q = V + tf.subtract(A, tf.reduce_mean(A, axis=1, keepdims=True))
         return Q
+
+
+# IQN Teacher Model
+# Model from: TODO
+
+def phi(x):
+        return np.asarray(x, dtype=np.float32) / 255
+
+def torch_iqn_teacher(num_actions=6, rel_path_to_best='../teacher_model/best'):
+    q_func = ImplicitQuantileQFunction(
+        psi=torch.nn.Sequential(
+            torch.nn.Conv2d(4, 32, 8, stride=4),
+            torch.nn.ReLU(),
+            torch.nn.Conv2d(32, 64, 4, stride=2),
+            torch.nn.ReLU(),
+            torch.nn.Conv2d(64, 64, 3, stride=1),
+            torch.nn.ReLU(),
+            torch.nn.Flatten(),
+        ),
+        phi=torch.nn.Sequential(
+            CosineBasisLinear(64, 3136),
+            torch.nn.ReLU(),
+        ),
+        f=torch.nn.Sequential(
+            torch.nn.Linear(3136, 512),
+            torch.nn.ReLU(),
+            torch.nn.Linear(512, num_actions),
+        ),
+    )
+
+    # Use the same hyper parameters as https://arxiv.org/abs/1710.10044
+    opt = torch.optim.Adam(q_func.parameters())
+
+    rbuf = ReplayBuffer(10**6)
+
+    explorer = LinearDecayEpsilonGreedy(
+        0,
+        0,
+        10_000,
+        lambda: np.random.randint(num_actions),
+    )
+
+    agent = IQN(
+        q_func,
+        opt,
+        rbuf,
+        gpu=-1,
+        gamma=0.99,
+        explorer=explorer,
+        phi=phi,
+    )
+
+    abs_cwd_dir = os.path.dirname(os.path.abspath(__file__))
+    print(abs_cwd_dir)
+    target_dir = os.path.join(abs_cwd_dir, rel_path_to_best)
+    print(target_dir)
+    agent.load(target_dir)
+
+if __name__ == '__main__':
+    agent = torch_iqn_teacher()

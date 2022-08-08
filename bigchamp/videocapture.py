@@ -4,7 +4,7 @@ from tensorflow import keras
 
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
-from helper_functions import instantiate_environmnent
+from bigchamp.helper_functions import instantiate_environmnent
 
 
 def create_video(model_path, video_name, n_episodes=10):

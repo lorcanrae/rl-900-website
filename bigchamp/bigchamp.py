@@ -2,22 +2,30 @@ import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 
-from models import DQN, DuelingDQN
-from helper_functions import instantiate_environmnent, reward_function
+from bigchamp.models import DQN, DuelingDQN, torch_iqn_teacher
+from bigchamp.helper_functions import instantiate_environmnent, reward_function
 
 
 def train_bigchamp(n_actions=6,
                    rand_frames=1_000_000,
                    greedy_frames=5_000_000,
-                   model_type=DuelingDQN,
+                   model_type='DuelingDQN',
+                   teacher=False,
                    ):
     '''Train Agent'''
 
     # Instantiate environment and models
     env = instantiate_environmnent()
 
-    model = model_type(n_actions)
-    model_target = model_type(n_actions)
+    if model_type == 'DQN':
+        model = DQN(n_actions)
+        model_target = DQN(n_actions)
+    else:
+        model = DuelingDQN(n_actions)
+        model_target = DuelingDQN(n_actions)
+
+    if teacher:
+        teacher_model = torch_iqn_teacher()
 
     # Configuration paramaters for the whole setup
     gamma = 0.99 # Discount factor for past rewards
@@ -80,6 +88,9 @@ def train_bigchamp(n_actions=6,
             if frame_count < epsilon_random_frames or epsilon > np.random.rand(1)[0]:
                 # Take random action
                 action = np.random.choice(n_actions)
+                # Take teachers recommended action
+                if teacher:
+                    action = teacher_model.act(state.reshape(4, 84, 84))
             else:
                 # Predict action Q-values from environment state
                 state_tensor = tf.convert_to_tensor(state)
@@ -94,9 +105,9 @@ def train_bigchamp(n_actions=6,
             epsilon = max(epsilon, epsilon_min)
 
             # Apply the sampled action in our environment
-            state_next, reward, done, _ = env.step(action)
+            state_next, reward, done, info = env.step(action)
             state_next = np.asarray(state_next).reshape(84, 84, 4)
-            episode_frame_number = _["episode_frame_number"]
+            episode_frame_number = info["episode_frame_number"]
             score += reward
 
             # Reward modifier (This will also affect score)
@@ -143,6 +154,7 @@ def train_bigchamp(n_actions=6,
 
                     # Apply the masks to the Q-values to get the Q-value for action taken
                     q_action = tf.reduce_sum(tf.multiply(q_values, masks), axis=1)
+
                     # Calculate loss between new Q-value and old Q-value
                     loss = loss_function(updated_q_values, q_action)
 
@@ -150,13 +162,12 @@ def train_bigchamp(n_actions=6,
                 grads = tape.gradient(loss, model.trainable_variables)
                 optimizer.apply_gradients(zip(grads, model.trainable_variables))
 
+            # update the the target network with new weights
             if frame_count % update_target_network == 0:
-                # update the the target network with new weights
                 model_target.set_weights(model.get_weights())
                 # Log details
-                print("xxxxxxxxxx")
-                template = "running reward: {:.2f} at episode {}, frame count {}"
-                print(template.format(running_reward, episode_count, frame_count))
+                print(f"Updating target network - running reward: {running_reward:.2f} \
+                    at episode {episode_count}, frame count {frame_count}")
 
             # Limit the state and reward history
             if len(rewards_history) > max_memory_length:
@@ -166,21 +177,8 @@ def train_bigchamp(n_actions=6,
                 del action_history[:1]
                 del done_history[:1]
 
+            # Increment timestep - not 100% sure why this is needed, but it is
             if done:
-                print("----------")
-                print("----------")
-                print(f"Game Number: {episode_count + 1}")
-                if frame_count < epsilon_random_frames:
-                    print("EXPLORATION")
-                    explored += 1
-                else:
-                    print("EXPLOITATION")
-                    exploited += 1
-                print(f"Score: {score}")
-                print(f"Reward: {episode_reward}")
-                print(f"Timesteps: {frames_this_episode}")
-                print(f"Game Frames Survived: {episode_frame_number}")
-                print(f"Epsilon: {epsilon}")
                 break
 
         # Update running reward to check condition for solving
@@ -191,17 +189,31 @@ def train_bigchamp(n_actions=6,
         running_reward = np.mean(episode_reward_history[-10:])
         running_score = np.mean(score_history[-10:])
 
-        print(f"Running Score (last 10 games): {running_score}")
-        print(f"Running Reward (last 10 games): {running_reward}")
-        print(f"Explored: {explored}, Exploited: {exploited}")
+        if (episode_count + 1) % 10 == 0:
+            print(f'Episode {episode_count + 1} -- Reward Score: {episode_reward:.0f} -- \
+Frames Survived: {episode_frame_number} -- Epsilon: {epsilon:.3f}')
+            print(f"10 Game Running Score: {running_score:.2f} -- 10 Game Running Reward: {running_reward:.2f}")
+            print(f"Explored: {explored}, Exploited: {exploited}")
 
         # Save model checkpoint
-        if episode_count % 100 == 0:
-            model.save("model3")
+        if episode_count % 250 == 0:
+            model_name = 'model-dqn' if model_type == 'DQN' else 'model-duelingdqn'
+            model_name = model_name if teacher == False else f'{model_name}-teacher'
+            model.save(f"{model_name}-e{episode_count}")
 
         episode_count += 1
 
-        if running_score > 1000:  # Condition to consider the task solved
+        # Condition to consider the task solved
+        if running_score > 1000:
             print("xxxxxxxxxx")
-            print("Solved at episode {}!".format(episode_count))
+            print(f"Solved at episode {episode_count}!")
+            model.save('model_solved')
             break
+
+
+if __name__ == '__main__':
+    train_bigchamp(n_actions=6,
+                   rand_frames=10_000_000,
+                   greedy_frames=50_000_000,
+                   model_type=DuelingDQN,
+                   teacher=False)

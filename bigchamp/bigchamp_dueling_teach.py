@@ -135,6 +135,7 @@ if __name__ == '__main__':
     model = DuelingDQN(num_actions)
     model_target = DuelingDQN(num_actions)
 
+
     # Instantiate teacher/best model
 
     q_func = ImplicitQuantileQFunction(
