@@ -10,14 +10,18 @@ project to my cohort.
 The Agents highest score achieved was 665, see below for our agent playing Space Invaders.
 
 <p align="center">
-  <img width="200" height="300" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/weekendmodel-model-e2-s665-30f.gif?raw=true">
+  <img width="300" height="450" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/weekendmodel-model-e2-s665-30f.gif?raw=true">
 </p>
 
 A project by Lorcan Rae, Alexander Gribius, Daniel Hawkins, Alberto Lopez Rueda for Le Wagon Batch #900 in London.
 
 ## Models
 
-TODO
+Two model architecture's are used to train agents, Deep Q Networks (DQN) and Dueling Deep Q Networks (Dueling DQN).
+Reinforcement is somewhat unique, in that it uses two models
+
+![DQN (top) and Dueling DQN (bottom architecture)]()
+'Image extract from Wang, Ziyu, et al. “Dueling network architectures for deep reinforcement learning.” arXiv preprint arXiv:1511.06581 (2015)'
 
 ### Local Minima
 
@@ -32,25 +36,24 @@ can see why our Le Wagon teachers pushed us heavily in this direction to save ti
 ## Known Issues
 
 There where known issues that could have been handled differently:
-- Time - the project was done in 8 days, reinforcement models take a huge amount of time (and/or processing power)
+- Time - the project was done in 8 days, reinforcement models take a non-trivial amount of time (and/or processing power)
 to train. All of our trained Agents appeared to fall into local minima.
 - Content - Reinforcement Learning was outside of the scope of Le Wagon's syllabus, we learnt the subject matter and
 applied it in less than two weeks.
 - Frame Stacking - there was an error in frame shape and stacking. As part of preprocessing
 frames are scaled and greyscaled to a single colour channel resulting in a frame shape of (84, 84, 1).
 To give the model a senses of temporality, four frames are stacked together, which should have resulted in an frame
-shape of (4, 84, 84, 1) then taking an element wise maximum of the four stacked frames as input to the model.
+shape of (4, 84, 84, 1) then taking an element wise maximum of the four stacked frames as input to the model with shape (84, 84, 1).
 We could not get this working with our existing framework and didn't have time to adequately diagnose and remedy.
 - Dependency conflicts - the package used to simulate Atari, [Gym](https://www.gymlibrary.ml/), has conflicts with
-a number of other packages. If any frame or video capture is required, Gym needs a renderer (like a graphics card),
-painful to do if using a WSL development environment.
-- TensorFlow and PyTorch - the Duelling DDQN models where written using TensorFlow, the IQN teacher model was written
-in PyTorch. Ideally they would have used the same package.
+a number of other packages, primarily it can be touchy with TensorFlow and PyTorch. If any frame or video capture is required, Gym needs a renderer (like a graphics card), not conducive in a WSL development environment.
+- TensorFlow and PyTorch - the DQN and Dueling DQN models where written using TensorFlow, the IQN teacher model was written
+in PyTorch. Ideally all models would have been developed using the same package.
 - Incentive Structures - The only incentive structure agents where trained on was the default scoring system,
 i.e. 5 points for a first row alien, 10 points for a second row alien, up to 30 points for the sixth row aliens and 200
 points for killing the mother-ship. We noticed that there was a number of agents that tried to kill the mother-ship to
-their own detriment. Time permitting, it would have been interesting to experiment with custom incentive structures, for
-example, prioritizing killing lower level aliens to buy more time to clear the screen.
+their own detriment. It would have been interesting to experiment with custom incentive structures to see the
+impact on the agents behaviour.
 
 ## Tools
 
