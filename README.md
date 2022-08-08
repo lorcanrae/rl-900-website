@@ -7,7 +7,7 @@ a Teacher during exploration. The agents where trained using Google Cloud Platfo
 VertexAI and the final model was embedded into a website to play in real time while I presented the
 project to my cohort.
 
-The Agents highest score achieved was 665, see below for a video of our most successful agent playing Space Invaders.
+The Agents highest score achieved was 665, see below for a video of our agent playing Space Invaders.
 
 <p align="center">
   <img width="300" height="450" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/weekendmodel-model-e2-s665-30f.gif?raw=true">
@@ -38,7 +38,7 @@ All learning is done in the *main network*, the *target network* is frozen and t
 at fixed intervals, usually 10,000 frames.
 
 <p align="center">
-  <img width="800" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/dqn-dueldqn-model-arch.png?raw=true">
+  <img width="800" height="600" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/dqn-dueldqn-model-arch.png?raw=true">
 </p>
 Top: DQN Model Architecture, Bottom: Dueling DQN Model Architecture
 
