@@ -37,6 +37,11 @@ current state.
 All learning is done in the *main network*, the *target network* is frozen and the weights are transferred from *main* to *target*
 at fixed intervals, usually 10,000 frames.
 
+The Dueling DQN model differs in architecture from the DQN model by splitting the output, **Q**, into two separate parts, the
+value function **V(s)** and the advantage function **A(s, a)**. The value function function tells us how much reward we will collect
+from a given state **s**, and the advantage function tells us how much better one action is compared to other actions. In splitting
+these layers out, states containing more *importance* to long term reward can be weighted more heavily.
+
 <p align="center">
   <img width="800" height="600" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/dqn-dueldqn-model-arch.png?raw=true">
 </p>
