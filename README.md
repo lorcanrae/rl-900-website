@@ -4,7 +4,7 @@ Training an AI Agent to play Atari Space Invaders.
 
 An agent was trained using a Duelling DQN model, using an established model (IQN) as
 a Teacher during exploration. The agents where trained using Google Cloud Platforms (GCP)
-VertexAI and the final model was embedded into a website to play in real time while I presented the
+VertexAI and the final model was embedded into a website (currently unavailable) to play in real time while I presented the
 project to my cohort.
 
 The Agents highest score achieved was 665, see below for a video of our agent playing Space Invaders.
