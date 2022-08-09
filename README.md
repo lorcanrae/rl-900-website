@@ -64,6 +64,7 @@ can see why our Le Wagon teachers pushed us heavily in this direction to save ti
 - This package requires using gym ver 0.21.x, a requirement of the PyTorch teacher model. A change to gyms source
 code is required in venv/versions/lib/python_version/site-packages/gym/wrappers/atari_preprocessing.py because of changes
 to numpy.
+
 '''python
 self.env.unwrapped.np_random.randint(1, self.noop_max + 1)
 # Needs to be changed to:
