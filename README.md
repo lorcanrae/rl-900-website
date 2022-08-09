@@ -40,7 +40,7 @@ at fixed intervals, usually 10,000 frames.
 The Dueling DQN model differs in architecture from the DQN model by splitting the output, **Q**, into two separate parts, the
 value function **V(s)** and the advantage function **A(s, a)**. The value function function tells us how much reward we will collect
 from a given state **s**, and the advantage function tells us how much better one action is compared to other actions. In splitting
-these layers out, states containing more *importance* to long term reward can be weighted more heavily.
+the layers out into value and advantage, states containing more *importance* to long term reward can be weighted more heavily.
 
 <p align="center">
   <img width="800" height="600" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/dqn-dueldqn-model-arch.png?raw=true">
@@ -76,9 +76,9 @@ to train. All of our trained Agents appeared to fall into local minima.
 - Content - Reinforcement Learning was outside of the scope of Le Wagon's syllabus, we learnt the subject matter and
 applied it in less than two weeks.
 - Frame Stacking - there was an error in frame shape and stacking. As part of preprocessing
-frames are scaled and greyscaled to a single colour channel resulting in a frame shape of (84, 84, 1).
+frames are scaled and greyscaled to a single colour channel resulting in a frame shape of `(84, 84, 1)`.
 To give the model a senses of temporality, four frames are stacked together, which should have resulted in an frame
-shape of (4, 84, 84, 1) then taking an element wise maximum of the four stacked frames as input to the model with shape (84, 84, 1).
+shape of `(4, 84, 84, 1)` then taking an element wise maximum of the four stacked frames as input to the model with shape `(84, 84, 1)`.
 We could not get this working with our existing framework and didn't have time to adequately diagnose and remedy.
 - Dependency conflicts - the package used to simulate Atari, [Gym](https://www.gymlibrary.ml/), has conflicts with
 a number of other packages, primarily it can be touchy with TensorFlow and PyTorch. If any frame or video capture is required, Gym needs a renderer (like a graphics card), not conducive in a WSL development environment.
