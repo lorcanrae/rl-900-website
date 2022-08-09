@@ -61,7 +61,15 @@ can see why our Le Wagon teachers pushed us heavily in this direction to save ti
 
 ## Known Issues
 
-There where known issues that could have been handled differently:
+- This package requires using gym ver 0.21.x, a requirement of the PyTorch teacher model. A change to gyms source
+code is required in venv/versions/lib/python_version/site-packages/gym/wrappers/atari_preprocessing.py because of changes
+to numpy.
+'''python
+self.env.unwrapped.np_random.randint(1, self.noop_max + 1)
+# Needs to be changed to:
+self.env.unwrapped.np_random.integers(1, self.noop_max + 1)
+'''
+
 - Time - the project was done in 8 days, reinforcement models take a non-trivial amount of time (and/or processing power)
 to train. All of our trained Agents appeared to fall into local minima.
 - Content - Reinforcement Learning was outside of the scope of Le Wagon's syllabus, we learnt the subject matter and
@@ -80,6 +88,7 @@ i.e. 5 points for a first row alien, 10 points for a second row alien, up to 30 
 points for killing the mother-ship. We noticed that there was a number of agents that tried to kill the mother-ship to
 their own detriment. It would have been interesting to experiment with custom incentive structures to see the
 impact on the agents behaviour.
+
 
 ## Tools
 
