@@ -62,7 +62,7 @@ can see why our Le Wagon teachers pushed us heavily in this direction to save ti
 ## Known Issues
 
 - This package requires using gym ver 0.21.x, a requirement of the PyTorch teacher model. A change to gyms source
-code is required in venv/versions/lib/python_version/site-packages/gym/wrappers/atari_preprocessing.py because of changes
+code is required in `venv/versions/lib/python_version/site-packages/gym/wrappers/atari_preprocessing.py` because of changes
 to numpy.
 
 ```python
