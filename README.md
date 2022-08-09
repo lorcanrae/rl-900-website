@@ -65,11 +65,11 @@ can see why our Le Wagon teachers pushed us heavily in this direction to save ti
 code is required in venv/versions/lib/python_version/site-packages/gym/wrappers/atari_preprocessing.py because of changes
 to numpy.
 
-'''python
+```python
 self.env.unwrapped.np_random.randint(1, self.noop_max + 1)
 # Needs to be changed to:
 self.env.unwrapped.np_random.integers(1, self.noop_max + 1)
-'''
+```
 
 - Time - the project was done in 8 days, reinforcement models take a non-trivial amount of time (and/or processing power)
 to train. All of our trained Agents appeared to fall into local minima.
