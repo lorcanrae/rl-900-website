@@ -208,15 +208,15 @@ def train_bigchamp(n_actions=6,
         if episode_count % 250 == 0:
             model_name = 'model-dqn' if model_type == 'DQN' else 'model-duelingdqn'
             model_name = model_name if teacher == False else f'{model_name}-teacher'
-            rel_path = os.path.join('..', 'saved_models', f'{model_name}-e{episode_count}.h5')
+            rel_path = os.path.join('..', 'saved_models', f'{model_name}-e{episode_count}')
             dir_path = os.path.dirname(__file__)
-            model.save(f"{dir_path}/{rel_path}")
+            model.save(f"{dir_path}/{rel_path}", save_format='tf')
 
         # Condition to consider the task solved
         if running_score > 100_000:
             print("xxxxxxxxxx")
             print(f"Solved at episode {episode_count}!")
-            model.save('model_solved')
+            model.save('model_solved', save_format='tf')
             break
 
 
