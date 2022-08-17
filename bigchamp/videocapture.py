@@ -2,16 +2,21 @@ import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 
+import os
+
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 from bigchamp.helper_functions import instantiate_environmnent
 
 
-def create_video(model_path, video_name, n_episodes=10):
+def create_video(model_name, video_name, n_episodes=10):
     '''Video capture for saved TensorFlow models'''
     env = instantiate_environmnent()
 
-    model = keras.models.load_model(model_path)
+    abs_cwd = os.path.dirname(os.path.abspath(__file__))
+    model_dir = os.path.join(abs_cwd, '..', 'saved_models', model_name)
+
+    model = keras.models.load_model(model_dir, compile=False)
     video = VideoRecorder(env, f'{video_name}.mp4', enabled=True)
 
     for episode in range(1, n_episodes+1):
@@ -34,4 +39,6 @@ def create_video(model_path, video_name, n_episodes=10):
 
 
 if __name__ == '__main__':
-    create_video(n_episodes=10, model_path='model2', video_name='model.mp4')
+    create_video(n_episodes=10,
+                 model_name='model-duelingdqn-teacher-e1000',
+                 video_name='model-e1000.mp4')
