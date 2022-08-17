@@ -4,7 +4,7 @@ Training an AI Agent to play Atari Space Invaders.
 
 An agent was trained using a Duelling DQN model, using an established model (IQN) as
 a Teacher during exploration. The agents where trained using Google Cloud Platforms (GCP)
-VertexAI and the final model was embedded into a website to play in real time while I presented the
+VertexAI and the final model was embedded into a website (currently unavailable) to play in real time while I presented the
 project to my cohort.
 
 The Agents highest score achieved was 665, see below for a video of our agent playing Space Invaders.
@@ -40,7 +40,7 @@ at fixed intervals, usually 10,000 frames.
 The Dueling DQN model differs in architecture from the DQN model by splitting the output, **Q**, into two separate parts, the
 value function **V(s)** and the advantage function **A(s, a)**. The value function function tells us how much reward we will collect
 from a given state **s**, and the advantage function tells us how much better one action is compared to other actions. In splitting
-these layers out, states containing more *importance* to long term reward can be weighted more heavily.
+the layers out into value and advantage, states containing more *importance* to long term reward can be weighted more heavily.
 
 <p align="center">
   <img width="800" height="600" src="https://github.com/lorcanrae/rl-900-website/blob/master/saved_media/dqn-dueldqn-model-arch.png?raw=true">
@@ -61,15 +61,24 @@ can see why our Le Wagon teachers pushed us heavily in this direction to save ti
 
 ## Known Issues
 
-There where known issues that could have been handled differently:
+- This package requires using gym ver 0.21.x, a requirement of the PyTorch teacher model. A change to gyms source
+code is required in `venv/versions/lib/python_version/site-packages/gym/wrappers/atari_preprocessing.py` because of changes
+to numpy.
+
+```python
+self.env.unwrapped.np_random.randint(1, self.noop_max + 1)
+# Needs to be changed to:
+self.env.unwrapped.np_random.integers(1, self.noop_max + 1)
+```
+
 - Time - the project was done in 8 days, reinforcement models take a non-trivial amount of time (and/or processing power)
 to train. All of our trained Agents appeared to fall into local minima.
 - Content - Reinforcement Learning was outside of the scope of Le Wagon's syllabus, we learnt the subject matter and
 applied it in less than two weeks.
 - Frame Stacking - there was an error in frame shape and stacking. As part of preprocessing
-frames are scaled and greyscaled to a single colour channel resulting in a frame shape of (84, 84, 1).
+frames are scaled and greyscaled to a single colour channel resulting in a frame shape of `(84, 84, 1)`.
 To give the model a senses of temporality, four frames are stacked together, which should have resulted in an frame
-shape of (4, 84, 84, 1) then taking an element wise maximum of the four stacked frames as input to the model with shape (84, 84, 1).
+shape of `(4, 84, 84, 1)` then taking an element wise maximum of the four stacked frames as input to the model with shape `(84, 84, 1)`.
 We could not get this working with our existing framework and didn't have time to adequately diagnose and remedy.
 - Dependency conflicts - the package used to simulate Atari, [Gym](https://www.gymlibrary.ml/), has conflicts with
 a number of other packages, primarily it can be touchy with TensorFlow and PyTorch. If any frame or video capture is required, Gym needs a renderer (like a graphics card), not conducive in a WSL development environment.
@@ -80,6 +89,7 @@ i.e. 5 points for a first row alien, 10 points for a second row alien, up to 30 
 points for killing the mother-ship. We noticed that there was a number of agents that tried to kill the mother-ship to
 their own detriment. It would have been interesting to experiment with custom incentive structures to see the
 impact on the agents behaviour.
+
 
 ## Tools
 
