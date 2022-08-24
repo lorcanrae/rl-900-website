@@ -14,6 +14,6 @@ opencv-python
 gym==0.21
 gym[other]
 gym[atari]
-gym[box2d]
-gym[all]
+# gym[box2d]
+# gym[all]
 gym[accept-rom-license]

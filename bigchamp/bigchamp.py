@@ -6,6 +6,7 @@ import os
 from bigchamp.models import DQN, DuelingDQN, torch_iqn_teacher
 from bigchamp.helper_functions import instantiate_environmnent, reward_function
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def train_bigchamp(n_actions=6,
                    rand_frames=1_000_000,
