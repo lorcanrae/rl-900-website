@@ -56,8 +56,8 @@ I believe this is primarily due to not training for long enough.
 
 ## Training
 
-Training was done on GCP VertexAI Virtual Machine in a Jupyter Notebook. I personally don't think this was great, but I
-can see why our Le Wagon teachers pushed us heavily in this direction to save time.
+Training was done on GCP VertexAI Virtual Machine in a Jupyter Notebook. Retrospectiveyl I personally don't think this was great, though I
+understand why our Le Wagon teachers pushed us in this direction to save time.
 
 ## Known Issues
 
