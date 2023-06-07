@@ -8,3 +8,4 @@ raw_data/
 .env
 bigchamp/superseded
 *.mp4
+*.pdf:Zone.Identifier
